@@ -66,12 +66,51 @@ PYTHONPATH=src python3 scripts/run_spam_lesson.py
 - Trained model: `artifacts/models/spam_lstm.keras`
 - Metrics report: `artifacts/reports/metrics.txt`
 
+---
+
+## ==================== SMS Spam Lesson ====================
+
+This repo now also includes a second beginner-friendly use case for SMS spam detection.
+
+## SMS Spam Lesson
+
+Files for the SMS lesson:
+- `notebooks/spam_sms_step_by_step.ipynb`
+- `scripts/run_spam_sms_lesson.py`
+- `src/spam_sms_lesson/pipeline.py`
+
+The SMS lesson keeps the code very simple and explains each step clearly.
+
+Supported SMS CSV formats:
+- `label` and `text`
+- `v1` and `v2` (common public SMS spam dataset format)
+
+The SMS script checks for a dataset in these locations:
+1. Project root: `spam_sms_dataset.csv`
+2. Project root: `sms_spam_dataset.csv`
+3. Project root: `spam.csv`
+4. `data/raw/spam_sms_dataset.csv`
+5. `data/raw/sms_spam_dataset.csv`
+6. `data/raw/spam.csv`
+
+Run the SMS lesson with:
+
+```bash
+PYTHONPATH=src python3 scripts/run_spam_sms_lesson.py
+```
+
+SMS output files go to:
+- `artifacts/models/spam_sms_lstm_from_script.keras`
+- `artifacts/reports/spam_sms_metrics_from_script.txt`
+- `artifacts/models/spam_sms_lstm_from_notebook.keras`
+- `artifacts/reports/spam_sms_metrics_from_notebook.txt`
+
 ## CSV Requirement
 
-Your CSV must have these columns:
+Your SMS CSV must have these columns:
 - `label` (values like `ham`, `spam`)
-- `text` (email/message content)
+- `text` (the SMS message content)
 
-The script checks for CSV in:
-1. Project root: `spam_ham_dataset.csv`
-2. `data/raw/spam_ham_dataset.csv`
+For the SMS lesson, the notebook and script look for `spam.csv` in:
+1. The project root
+2. `data/raw/`
