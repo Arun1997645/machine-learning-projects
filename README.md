@@ -160,3 +160,120 @@ The provided synthetic dataset includes these categories:
 - `Technology`
 - `Politics`
 - `Entertainment`
+
+---
+
+## ==================== Handwritten Digit Classification with TensorFlow ====================
+
+This repo now also includes a beginner-friendly lesson that teaches a neural network
+to **read handwritten digits (0–9)** using the famous MNIST dataset and TensorFlow/Keras.
+
+## Handwritten Digits Lesson
+
+Files for this lesson:
+- `notebooks/handwritten_digits_tensorflow_step_by_step.ipynb`
+
+This lesson is designed so that even a complete beginner can follow along.
+Every step is explained in plain English, and every result is interpreted so you
+know what it means.
+
+---
+
+## What You Will Learn (Step by Step)
+
+| Step | What happens                          | Key idea                                        |
+|------|---------------------------------------|-------------------------------------------------|
+| 1    | Load the MNIST dataset                | 60,000 training images + 10,000 test images     |
+| 2    | Explore class distribution            | Every digit (0–9) has roughly equal examples    |
+| 3    | Visualise sample images               | Each image is 28 × 28 grayscale pixels          |
+| 4    | Normalise pixel values                | Divide by 255 so values are between 0.0 and 1.0 |
+| 5    | Build a Sequential neural network     | Flatten → Dense(128) → Dense(128) → Dense(10)   |
+| 6    | Compile and train the model           | Adam optimiser, 5 training epochs               |
+| 7    | Plot training history                 | Accuracy goes up, loss goes down = healthy      |
+| 8    | Evaluate on test data                 | ~97–98 % accuracy on 10,000 unseen images       |
+| 9    | Confusion matrix                      | See exactly which digits get mixed up           |
+| 10   | Display correct and wrong predictions | Visual comparison of hits and misses            |
+| 11   | Save and reload the trained model     | `.keras` format keeps everything intact         |
+| 12   | Predict a single new image            | Confidence bar chart shows model certainty      |
+
+---
+
+## What is MNIST?
+
+MNIST is one of the most famous datasets in machine learning.
+It contains 70,000 black-and-white photos of handwritten digits,
+already split into 60,000 for training and 10,000 for testing.
+The dataset is built into Keras — no manual download needed.
+
+---
+
+## How to Run
+
+Open the notebook in VS Code and run all cells from top to bottom:
+
+```
+notebooks/handwritten_digits_tensorflow_step_by_step.ipynb
+```
+
+No script file is needed — the notebook is self-contained and runs everything.
+
+---
+
+## Output Files
+
+| File | Description |
+|------|-------------|
+| `artifacts/models/handwritten_digit_model.keras` | Trained neural network saved to disk |
+| `artifacts/plots/digit_training_history.png`     | Accuracy and loss curves over epochs |
+| `artifacts/plots/digit_confusion_matrix.png`     | Confusion matrix heatmap             |
+| `artifacts/reports/digit_metrics.txt`            | Accuracy and classification report   |
+
+---
+
+## Neural Network Architecture
+
+```
+Input image  (28 × 28 pixels)
+        ↓
+Flatten  →  converts 28×28 grid to a row of 784 numbers
+        ↓
+Dense(128, activation='relu')   →  finds patterns
+        ↓
+Dense(128, activation='relu')   →  finds deeper patterns
+        ↓
+Dense(10, activation='softmax') →  outputs confidence % for each digit (0–9)
+```
+
+---
+
+## Key Concepts Explained Simply
+
+- **Epoch** — one full pass through all 60,000 training images.
+  Think of it as one complete round of studying.
+- **Weight** — a number on every connection between neurons.
+  Training = adjusting these numbers until predictions are correct.
+- **Normalisation** — dividing pixel values by 255 so they are small (0–1).
+  Small numbers make learning faster and more stable.
+- **Softmax** — converts raw scores into percentage confidence values.
+  Example: `[0.01, 0.02, 0.90, ...]` means 90 % confident the digit is 2.
+- **Overfitting** — the model memorises training data but fails on new data.
+  Fix: use Dropout layers or reduce epochs.
+
+---
+
+## What Could You Try Next?
+
+- Add a **Dropout layer** (`tf.keras.layers.Dropout(0.2)`) to reduce overfitting.
+- Train for **more epochs** (10–20) and see if accuracy improves.
+- Try a **Convolutional Neural Network (CNN)** — it reads images like human eyes
+  and typically achieves 99 %+ accuracy on MNIST.
+- Test the model on a **photo of your own handwriting**
+  (resize to 28×28, convert to grayscale, invert colours).
+
+---
+
+## Branch
+
+This lesson was developed on the
+`feature/handwritten-digit-classification` branch
+and merged into `main`.
